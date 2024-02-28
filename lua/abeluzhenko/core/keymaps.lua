@@ -10,8 +10,8 @@ local keymap = vim.keymap -- for conciseness
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
 -- disable continuations
-keymap.set("n", "<leader>o", "o<Esc>^Da", { desc = "Insert line below" })
-keymap.set("n", "<leader>O", "O<Esc>^Da", { desc = "Insert line above" })
+keymap.set("n", "o", "o<Esc>^Da", { desc = "Insert line below" })
+keymap.set("n", "O", "O<Esc>^Da", { desc = "Insert line above" })
 
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
