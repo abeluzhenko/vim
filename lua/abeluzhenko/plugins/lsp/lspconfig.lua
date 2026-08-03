@@ -70,12 +70,20 @@ return {
       on_attach = on_attach,
     })
 
-    -- configure typescript server with plugin
-    vim.lsp.config("ts_ls", {
+    -- configure tsgo (TypeScript in Go - 10x faster than ts_ls)
+    vim.lsp.config("tsgo", {
       capabilities = capabilities,
       on_attach = on_attach,
-      init_options = {
-        maxTsServerMemory = 8192,
+      cmd = { "tsgo", "--lsp", "--stdio" },
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+      root_markers = {
+        "package-lock.json",
+        "yarn.lock",
+        "pnpm-lock.yaml",
+        "bun.lockb",
+        "tsconfig.json",
+        "jsconfig.json",
+        ".git",
       },
     })
 
@@ -122,7 +130,7 @@ return {
     -- Enable all configured LSP servers
     vim.lsp.enable({
       "html",
-      "ts_ls",
+      "tsgo",
       "cssls",
       "emmet_ls",
       "lua_ls",
