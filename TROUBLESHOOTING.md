@@ -81,11 +81,32 @@ Or use the keymap: `<leader>mp` (format current buffer)
 
 ## Treesitter Issues
 
+> nvim-treesitter is on the `main` branch. It requires the `tree-sitter` CLI to
+> compile parsers (see SETUP.md → Prerequisites).
+
 ### Check Treesitter Status
 
 ```vim
-:TSInstallInfo
+:checkhealth nvim-treesitter
 ```
+
+List installed parsers:
+
+```vim
+:lua =require("nvim-treesitter.config").get_installed()
+```
+
+### Syntax Highlighting Missing / Wrong
+
+Usually means the parser failed to compile. Check `:TSLog` for errors like
+`Error during "tree-sitter build": ENOENT (cmd): 'tree-sitter'` — that means the
+`tree-sitter` CLI is not installed or not on Neovim's `PATH`. Install it
+(`npm install -g tree-sitter-cli`), confirm `tree-sitter --version` works in the
+shell you launch Neovim from, then re-run `:TSUpdate`.
+
+Highlighting is started per-buffer via a `FileType` autocmd in
+`lua/abeluzhenko/plugins/nvim-treesitter.lua`; confirm the parser is installed
+and the buffer's `filetype` is set.
 
 ### Update Treesitter Parsers
 
@@ -154,7 +175,7 @@ Runs comprehensive diagnostics on all components.
 :version
 ```
 
-Ensure you're running Neovim 0.8+.
+Ensure you're running Neovim 0.11+ (required by nvim-treesitter's `main` branch).
 
 ## Common Issues
 

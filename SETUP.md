@@ -1,5 +1,19 @@
 # Setup Guide
 
+## Prerequisites
+
+- **Neovim 0.11+** — required by nvim-treesitter's `main` branch.
+- **`tree-sitter` CLI** — nvim-treesitter's `main` branch compiles parsers from
+  grammars on install, so the CLI must be installed and on Neovim's `PATH`:
+
+  ```bash
+  npm install -g tree-sitter-cli
+  # or: cargo install tree-sitter-cli
+  ```
+
+  Verify with `tree-sitter --version`. Note: Homebrew's `tree-sitter` formula
+  installs only the library, **not** the CLI binary.
+
 ## First Launch
 
 When you launch Neovim for the first time, lazy.nvim will automatically:
@@ -20,10 +34,18 @@ Follow the browser prompts to authenticate your GitHub account.
 
 ### Treesitter Parsers
 
-Treesitter parsers compile automatically in the background. You can check their status:
+On the `main` branch, parsers are compiled from grammars by the `tree-sitter`
+CLI (see Prerequisites) and installed asynchronously in the background on first
+launch. Check their status with:
 
 ```vim
-:TSInstallInfo
+:checkhealth nvim-treesitter
+```
+
+Or list installed parsers:
+
+```vim
+:lua =require("nvim-treesitter.config").get_installed()
 ```
 
 ## Verification

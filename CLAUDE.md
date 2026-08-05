@@ -6,15 +6,23 @@ Personal Neovim configuration that provides a modern IDE experience. Written ent
 
 ### Tech Stack
 
-- **Language**: Lua (Neovim 0.8+)
+- **Language**: Lua (Neovim 0.11+, required by nvim-treesitter `main` branch)
 - **Plugin Manager**: lazy.nvim
 - **LSP Management**: Mason + mason-lspconfig
 - **Formatter**: conform.nvim (oxfmt, stylua)
 - **Linter**: nvim-lint (eslint_d)
 - **Completion**: nvim-cmp + GitHub Copilot
 - **Fuzzy Finder**: Telescope
-- **Syntax Highlighting**: Treesitter
+- **Syntax Highlighting**: Treesitter (`main` branch)
 - **Version Control**: Gitsigns + Diffview
+
+### External Prerequisites
+
+- **`tree-sitter` CLI** — required by nvim-treesitter's `main` branch, which
+  compiles parsers from grammars on install (unlike the old `master` branch).
+  Install with `npm install -g tree-sitter-cli` (or `cargo install tree-sitter-cli`).
+  It must be on the `PATH` seen by Neovim. Note: Homebrew's `tree-sitter`
+  formula ships only the library, not the CLI binary.
 
 ### Key Features
 
@@ -99,7 +107,22 @@ Fundamental configurations independent of plugins:
 
 **Editing**: nvim-cmp, copilot.lua, nvim-autopairs, nvim-surround, comment.lua, inc-rename-nvim
 
-**Code Intelligence**: nvim-treesitter, nvim-treesitter-text-objects, treesitter-context, lsp-signature
+**Code Intelligence**: nvim-treesitter (`main` branch), nvim-treesitter-text-objects, treesitter-context, lsp-signature
+
+> **nvim-treesitter is on the `main` branch**, which has a different API from
+> the legacy `master` branch:
+>
+> - Parsers are installed via `require("nvim-treesitter").install({...})`
+>   (async, compiles via the `tree-sitter` CLI) — not `ensure_installed`.
+> - `setup()` only accepts `install_dir`; `highlight`/`indent`/`textobjects`/
+>   `incremental_selection` keys are ignored.
+> - Highlighting and indentation are started per-buffer in a `FileType`
+>   autocmd (`vim.treesitter.start()` + treesitter `indentexpr`).
+> - Textobjects use manual keymaps via the `nvim-treesitter-textobjects`
+>   `select`/`swap`/`move` modules.
+> - `incremental_selection` was removed with no built-in replacement.
+>
+> See `lua/abeluzhenko/plugins/nvim-treesitter.lua`.
 
 **Formatting & Linting**: formatting.lua (conform.nvim), linting.lua (nvim-lint)
 
