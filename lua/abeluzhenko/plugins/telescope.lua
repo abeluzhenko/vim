@@ -57,18 +57,5 @@ return {
     telescope.load_extension("ast_grep")
     telescope.load_extension("live_grep_args")
     -- telescope.load_extension("dumb_jump")
-
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
-
-    keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-    keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-    keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-    keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
-    keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
-    keymap.set("n", "<leader>fh", "<cmd>Telescope search_history<cr>", { desc = "Search history" })
-    keymap.set("n", "<leader>fp", "<cmd>Telescope resume<cr>", { desc = "Resume previous search" })
-    -- keymap.set("n", "<leader>fa", "<cmd>Telescope AST_grep<cr>", { desc = "AST-based grep" })
-    -- keymap.set("n", "<leader>fj", "<cmd>Telescope dumb_jump<cr>", { desc = "Jump to definition" })
   end,
 }

@@ -167,9 +167,6 @@ return {
 
       -- NOTE: `incremental_selection` was removed on the treesitter `main`
       -- branch and has no built-in replacement, so it is no longer configured.
-
-      -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-      require("ts_context_commentstring").setup({})
     end,
   },
 }
